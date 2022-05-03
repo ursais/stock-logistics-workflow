@@ -8,8 +8,7 @@ class StockPicking(models.Model):
 
     def _check_required_lot_info(self):
         for picking in self:
-            lines = picking.move_line_ids_without_package
-            lines_missing_lotinfo = lines.filtered(
+            lines_missing_lotinfo = picking.move_line_ids_without_package.filtered(
                 lambda x: x.lot_info_usage == "required" and not x.lot_info
             )
             if lines_missing_lotinfo:
@@ -21,5 +20,4 @@ class StockPicking(models.Model):
     def button_validate(self):
         res = super().button_validate()
         self._check_required_lot_info()
-        # FIXME: do not copy lot info to created back orders
         return res
