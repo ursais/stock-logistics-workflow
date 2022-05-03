@@ -8,5 +8,5 @@ class ProductTemplate(models.Model):
     lot_info_usage = fields.Selection(
         [("no", "No"), ("optional", "Optional"), ("required", "Required")],
         default="no",
-        string="Lot information usage",
+        string="Lot Information Usage",
     )
