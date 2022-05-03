@@ -1,1 +1,3 @@
-from . import product_template, stock_move_line
+from . import product_template
+from . import stock_move_line
+from . import stock_picking
