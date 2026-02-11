@@ -101,8 +101,8 @@ class TestStockLockLot(common.TransactionCase):
         move._action_assign()
 
         # Refresh quants to get updated quantities
-        locked_quant.invalidate_cache()
-        unlocked_quant.invalidate_cache()
+        locked_quant.invalidate_recordset()
+        unlocked_quant.invalidate_recordset()
 
         # Only the unlocked lot should have been reserved
         self.assertEqual(
