@@ -133,7 +133,9 @@ class StockLot(models.Model):
 
     def _get_stage_for_locked(self, locked):
         """Return the first stage matching the locked value."""
-        return self.env["stock.lot.stage"].search([("locked", "=", locked)], limit=1)
+        domain = [("locked", "=", locked)]
+        domain += [("approve_full_qty", "=", True)] if not locked else []
+        return self.env["stock.lot.stage"].search(domain, limit=1)
 
     @api.model_create_multi
     def create(self, vals_list):
