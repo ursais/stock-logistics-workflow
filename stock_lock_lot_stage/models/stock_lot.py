@@ -11,6 +11,7 @@ class StockLot(models.Model):
         compute="_compute_locked",
         inverse="_inverse_locked",
         store=True,
+        copy=False,
     )
 
     stage_id = fields.Many2one(
@@ -19,6 +20,7 @@ class StockLot(models.Model):
         tracking=True,
         default=lambda self: self._default_stage_id(),
         group_expand="_read_group_stage_ids",
+        copy=False,
         index=True,
     )
     partial_approved_qty = fields.Float(
@@ -26,6 +28,7 @@ class StockLot(models.Model):
         help="Maximum quantity allowed in locations that don't allow locked lots."
         "Leave zero to approve the full quantity.",
         tracking=True,
+        copy=False,
     )
     usable_location_qty = fields.Float(
         compute="_compute_usable_location_qty",
@@ -36,10 +39,12 @@ class StockLot(models.Model):
         "res.users",
         readonly=True,
         help="User who last unlocked this lot",
+        copy=False,
     )
     last_unlocked_at = fields.Datetime(
         readonly=True,
         help="Date and time when this lot was last unlocked",
+        copy=False,
     )
 
     @api.model
@@ -78,7 +83,9 @@ class StockLot(models.Model):
 
     @api.constrains("stage_id")
     def _check_stage_change(self):
-        if not self.user_has_groups("stock_lock_lot.group_lock_lot"):
+        stage_changed = any(lot.stage_id != lot._origin.stage_id for lot in self)
+        can_lock_lot = self.user_has_groups("stock_lock_lot.group_lock_lot")
+        if stage_changed and not can_lock_lot:
             raise exceptions.AccessError(_("You are not allowed to change lot stages."))
 
     @api.constrains("stage_id", "partial_approved_qty")
