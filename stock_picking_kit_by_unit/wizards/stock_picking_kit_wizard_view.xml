@@ -19,7 +19,7 @@
                         <field
                             name="lot_name"
                             default_focus="1"
-                            attrs="{'readonly': [('tracking', '=', 'none')]}"
+                            readonly="tracking == 'none'"
                         />
                         <field name="number" readonly="True" />
                         <field

@@ -1,6 +1,6 @@
 # Copyright (C) 2023 Open Source Integrators (https://www.opensourceintegrators.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import _, api, exceptions, fields, models
+from odoo import api, exceptions, fields, models
 
 
 class StockPickingKitWizard(models.TransientModel):
@@ -17,8 +17,10 @@ class StockPickingKitWizard(models.TransientModel):
             product = wizard.product_id
             if not (product.is_kits or product.tracking == "serial"):
                 raise exceptions.ValidationError(
-                    _("Product %s must but a Kit or be Serial Number controlled.")
-                    % wizard.product_id.display_name
+                    self.env._(
+                        "Product %s must be a Kit or be Serial Number controlled.",
+                        wizard.product_id.display_name,
+                    )
                 )
 
     @api.depends("picking_id")
@@ -84,14 +86,12 @@ class StockPickingKitWizard(models.TransientModel):
             move_line = wizard_line._get_move_line_to_update()
             if not move_line:
                 raise exceptions.UserError(
-                    _(
+                    self.env._(
                         "No matching Detailed Operations line found"
-                        " for %(name)s # %(number)s."
+                        " for %(name)s # %(number)s.",
+                        name=wizard_line.component_id.display_name,
+                        number=wizard_line.number,
                     )
-                    % {
-                        "name": wizard_line.component_id.display_name,
-                        "number": wizard_line.number,
-                    }
                 )
             # else:
             if wizard_line.is_start_pack and pack_lines:
@@ -112,7 +112,7 @@ class StockPickingKitWizard(models.TransientModel):
         self.ensure_one()
         has_package_group = self.user_has_groups("stock.group_tracking_lot")
         if move_lines and has_package_group:
-            package = self.picking_id._put_in_pack(move_lines)
+            package = self.picking_id.action_put_in_pack(move_lines)
             main_lot = move_lines[:1].lot_name
             if main_lot:
                 package.name = main_lot
