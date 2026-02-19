@@ -7,7 +7,7 @@ class StockPicking(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if "move_type" not in vals and vals.get("picking_type_id"):
+            if vals.get("picking_type_id"):
                 picking_type = self.env["stock.picking.type"].browse(
                     vals["picking_type_id"]
                 )
