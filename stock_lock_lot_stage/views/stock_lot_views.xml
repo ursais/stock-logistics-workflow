@@ -19,11 +19,7 @@
                 <attribute name="readonly">1</attribute>
             </field>
             <notebook position="inside">
-                <page
-                    string="Quality Control"
-                    name="quality_control"
-                    groups="stock_lock_lot.group_lock_lot"
-                >
+                <page string="Quality Control" name="quality_control">
                     <group>
                         <group name="qc_quantities">
                             <field name="partial_approved_qty" />
@@ -49,6 +45,11 @@
             </field>
             <field name="product_qty" position="after">
                 <field name="usable_location_qty" optional="hide" />
+                <field name="last_unlocked_by" optional="hide" />
+                <field name="last_unlocked_at" optional="hide" />
+            </field>
+            <field name="locked" position="attributes">
+                <attribute name="readonly">1</attribute>
             </field>
         </field>
     </record>
