@@ -75,7 +75,7 @@ class TestStockMoveDisableExtra(TransactionCase):
         self.move.move_line_ids.write(
             {
                 "lot_id": lot.id,
-                "quantity_done": 15,
+                "qty_done": 15,
             }
         )
 
@@ -92,6 +92,13 @@ class TestStockMoveDisableExtra(TransactionCase):
             self.move.product_uom_qty, 10, "Move quantity should remain unchanged"
         )
 
+        # Check that the move line still has the excess quantity
+        self.assertEqual(
+            self.move.move_line_ids.qty_done,
+            15,
+            "Move line should have the excess quantity",
+        )
+
         # Check that lot information is preserved
         self.assertEqual(
             self.move.move_line_ids.lot_id.id,
@@ -100,9 +107,7 @@ class TestStockMoveDisableExtra(TransactionCase):
         )
 
         # Check that the quantity done is preserved
-        self.assertEqual(
-            self.move.quantity_done, 15, "Quantity done should be preserved"
-        )
+        self.assertEqual(self.move.qty_done, 15, "Quantity done should be preserved")
 
         # Check that excess quantity is stored
         self.assertEqual(
@@ -128,7 +133,7 @@ class TestStockMoveDisableExtra(TransactionCase):
         self.move.move_line_ids.write(
             {
                 "lot_id": lot.id,
-                "quantity_done": 15,
+                "qty_done": 15,
             }
         )
 
