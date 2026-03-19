@@ -75,7 +75,7 @@ class TestStockMoveDisableExtra(TransactionCase):
         self.move.move_line_ids.write(
             {
                 "lot_id": lot.id,
-                "qty_done": 15,
+                "quantity": 15,
             }
         )
 
@@ -94,7 +94,7 @@ class TestStockMoveDisableExtra(TransactionCase):
 
         # Check that the move line still has the excess quantity
         self.assertEqual(
-            self.move.move_line_ids.qty_done,
+            self.move.move_line_ids.quantity,
             15,
             "Move line should have the excess quantity",
         )
@@ -133,7 +133,7 @@ class TestStockMoveDisableExtra(TransactionCase):
         self.move.move_line_ids.write(
             {
                 "lot_id": lot.id,
-                "qty_done": 15,
+                "quantity": 15,
             }
         )
 
