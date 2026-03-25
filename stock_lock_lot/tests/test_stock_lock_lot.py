@@ -121,3 +121,132 @@ class TestStockLockLot(common.TransactionCase):
             5.0,
             "Unlocked lot should have reduced availability",
         )
+
+    def test_locked_lot_included_in_reservation_when_allowed(self):
+        """Test that locked lots can be reserved when category allows it."""
+        # Update category to allow reservation of locked lots
+        self.category.lot_reserve_locked = False
+
+        # Create two lots - one locked, one unlocked
+        locked_lot = self.env["stock.lot"].create(
+            self._get_lot_default_vals(name="Locked Lot", locked=True)
+        )
+        unlocked_lot = self.env["stock.lot"].create(
+            self._get_lot_default_vals(name="Unlocked Lot", locked=False)
+        )
+
+        # Create quants for both lots (_update_available_quantity returns tuple)
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.location, 10, lot_id=locked_lot
+        )
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.location, 10, lot_id=unlocked_lot
+        )
+
+        # Get the quant objects using helper function
+        locked_quant = self._get_lot_quant(locked_lot)
+        unlocked_quant = self._get_lot_quant(unlocked_lot)
+
+        # Check initial availability - both should have 10 available
+        self.assertEqual(locked_quant.available_quantity, 10.0)
+        self.assertEqual(unlocked_quant.available_quantity, 10.0)
+
+        # Try to create a stock move that would need to reserve inventory
+        move = self.env["stock.move"].create(
+            {
+                "name": "Test move",
+                "product_id": self.product.id,
+                "product_uom_qty": 15.0,  # Need more than unlocked lot has
+                "product_uom": self.product.uom_id.id,
+                "location_id": self.location.id,
+                "location_dest_id": self.env.ref("stock.stock_location_customers").id,
+            }
+        )
+
+        # Confirm the move to trigger reservation
+        move._action_confirm()
+        move._action_assign()
+
+        # Refresh quants to get updated quantities
+        locked_quant.invalidate_recordset()
+        unlocked_quant.invalidate_recordset()
+
+        # Both lots should have been reserved since category allows it
+        self.assertEqual(
+            locked_quant.reserved_quantity,
+            5.0,
+            "Locked lot should be reserved when allowed",
+        )
+        self.assertEqual(
+            locked_quant.available_quantity,
+            5.0,
+            "Locked lot should have reduced availability",
+        )
+        self.assertEqual(
+            unlocked_quant.reserved_quantity, 10.0, "Unlocked lot should be reserved"
+        )
+        self.assertEqual(
+            unlocked_quant.available_quantity,
+            0.0,
+            "Unlocked lot should have no availability left",
+        )
+
+    def test_lot_level_reserve_locked_override(self):
+        """Test that lot-level reserve_locked overrides category setting."""
+        # Category does NOT allow reservation of locked lots
+        self.category.lot_reserve_locked = False
+
+        # Create a locked lot with lot-level override to allow reservation
+        locked_lot = self.env["stock.lot"].create(
+            self._get_lot_default_vals(name="Locked Lot", locked=True)
+        )
+        locked_lot.locked_reservation = False
+
+        # Create an unlocked lot for comparison
+        unlocked_lot = self.env["stock.lot"].create(
+            self._get_lot_default_vals(name="Unlocked Lot", locked=False)
+        )
+
+        # Create quants for both lots
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.location, 10, lot_id=locked_lot
+        )
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.location, 10, lot_id=unlocked_lot
+        )
+
+        # Get the quant objects using helper function
+        locked_quant = self._get_lot_quant(locked_lot)
+        unlocked_quant = self._get_lot_quant(unlocked_lot)
+
+        # Try to create a stock move that would need to reserve inventory
+        move = self.env["stock.move"].create(
+            {
+                "name": "Test move",
+                "product_id": self.product.id,
+                "product_uom_qty": 5.0,
+                "product_uom": self.product.uom_id.id,
+                "location_id": self.location.id,
+                "location_dest_id": self.env.ref("stock.stock_location_customers").id,
+            }
+        )
+
+        # Confirm the move to trigger reservation
+        move._action_confirm()
+        move._action_assign()
+
+        # Refresh quants to get updated quantities
+        locked_quant.invalidate_recordset()
+        unlocked_quant.invalidate_recordset()
+
+        # The locked lot should be reserved due to lot-level override
+        self.assertEqual(
+            locked_quant.reserved_quantity,
+            5.0,
+            "Locked lot should be reserved with lot-level override",
+        )
+        self.assertEqual(
+            locked_quant.available_quantity,
+            5.0,
+            "Locked lot should have reduced availability",
+        )

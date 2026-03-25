@@ -4,8 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 17.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-25 22:34+0000\n"
+"PO-Revision-Date: 2026-03-25 22:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,6 +26,11 @@ msgid "Allow Locked"
 msgstr ""
 
 #. module: stock_lock_lot
+#: model_terms:ir.ui.view,arch_db:stock_lock_lot.search_product_lot_filter
+msgid "Allow Reservation When Locked"
+msgstr ""
+
+#. module: stock_lock_lot
 #: model:res.groups,name:stock_lock_lot.group_lock_lot
 msgid "Allow to block/unblock Serial Numbers/Lots"
 msgstr ""
@@ -36,6 +43,16 @@ msgstr ""
 #. module: stock_lock_lot
 #: model:ir.model.fields,field_description:stock_lock_lot.field_product_category__lot_default_locked
 msgid "Block new Serial Numbers/lots"
+msgstr ""
+
+#. module: stock_lock_lot
+#: model:ir.model.fields,field_description:stock_lock_lot.field_product_category__lot_reserve_locked
+msgid "Block reservation of locked lots"
+msgstr ""
+
+#. module: stock_lock_lot
+#: model:ir.model.fields,field_description:stock_lock_lot.field_stock_lot__locked_reservation
+msgid "Block reservation when locked"
 msgstr ""
 
 #. module: stock_lock_lot
@@ -68,13 +85,30 @@ msgid ""
 msgstr ""
 
 #. module: stock_lock_lot
+#: model:ir.model.fields,help:stock_lock_lot.field_product_category__lot_reserve_locked
+msgid ""
+"If checked, locked lots in this category will be blocked from reservation. "
+"If unchecked, locked lots can still be reserved for orders, but they cannot "
+"be moved unless the destination location allows locked lots"
+msgstr ""
+
+#. module: stock_lock_lot
 #: model:ir.model.fields,help:stock_lock_lot.field_stock_lot__message_needaction
 msgid "If checked, new messages require your attention."
 msgstr ""
 
 #. module: stock_lock_lot
 #: model:ir.model.fields,help:stock_lock_lot.field_stock_lot__message_has_error
+#: model:ir.model.fields,help:stock_lock_lot.field_stock_lot__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: stock_lock_lot
+#: model:ir.model.fields,help:stock_lock_lot.field_stock_lot__locked_reservation
+msgid ""
+"If checked, this lot will be blocked for reservation when locked. If "
+"unchecked, this lot can be reserved even when locked. This overrides the "
+"category setting."
 msgstr ""
 
 #. module: stock_lock_lot
@@ -150,6 +184,21 @@ msgstr ""
 #. module: stock_lock_lot
 #: model:ir.model,name:stock_lock_lot.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: stock_lock_lot
+#: model:ir.model,name:stock_lock_lot.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_lock_lot
+#: model:ir.model.fields,field_description:stock_lock_lot.field_stock_lot__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: stock_lock_lot
+#: model:ir.model.fields,field_description:stock_lock_lot.field_stock_lot__message_has_sms_error
+msgid "SMS Delivery error"
 msgstr ""
 
 #. module: stock_lock_lot

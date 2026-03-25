@@ -21,8 +21,14 @@ class StockQuant(models.Model):
             product_id, location_id, lot_id, package_id, owner_id, strict
         )
         # Extend StockQuant to exclude locked lots from reservation domain
+        # Block locked lots unless they have reserve_locked=False
         if not self.env.context.get("force_allow_locked_lots"):
-            domain = expression.AND(
-                [["|", ("lot_id.locked", "=", False), ("lot_id", "=", False)], domain]
-            )
+            filter_domain = [
+                "|",
+                "|",
+                ("lot_id", "=", False),
+                ("lot_id.locked", "=", False),
+                ("lot_id.locked_reservation", "=", False),
+            ]
+            domain = expression.AND([domain, filter_domain])
         return domain

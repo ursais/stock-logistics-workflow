@@ -402,8 +402,18 @@ shipped. The reservation exclusion can be bypassed using the
 Serial Numbers/Lots”</li>
 </ol>
 <p>To allow move locked lots to a location: #. Open the locations (menu
-“Inventory &gt; Configuration &gt; Warehouse Management &gt; Locations”) #. check
+“Inventory &gt; Configuration &gt; Warehouse Management &gt; Locations”) #. Check
 the box “Allow Locked”</p>
+<p>To configure lot behavior at product category level: #. Open the product
+categories (menu “Sales &gt; Configuration &gt; Product Categories”) #. In the
+“Warehouse” section, you can configure:</p>
+<ul class="simple">
+<li>“Block new Serial Numbers/lots”: New lots will be created as blocked
+by default</li>
+<li>“Allow reservation of locked lots”: If checked, locked lots can still
+be reserved for orders, but cannot be moved unless the destination
+location allows locked lots</li>
+</ul>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-2">Usage</a></h1>
@@ -415,21 +425,31 @@ the box “Allow Locked”</p>
 does not have the ‘Allow Locked’ field checked</li>
 </ol>
 <p><strong>Reservation Behavior:</strong></p>
+<p>By default, locked lots are automatically excluded from stock
+reservations. When creating outgoing orders (sales orders, transfers,
+etc.), the system will only reserve from unlocked lots. This prevents
+blocked inventory from being allocated to orders.</p>
+<p>However, you can configure this behavior at the product category level:</p>
 <ul class="simple">
-<li>Locked lots are automatically excluded from stock reservations</li>
-<li>When creating outgoing orders (sales orders, transfers, etc.), the
-system will only reserve from unlocked lots</li>
-<li>This prevents blocked inventory from being allocated to orders</li>
-<li>To override this behavior, use the ‘force_allow_locked_lots’ context
-in custom operations when explicitly needed</li>
+<li>Go to <em>Sales &gt; Configuration &gt; Product Categories</em></li>
+<li>In the Warehouse section, check “Allow reservation of locked lots”</li>
+<li>When enabled, locked lots in this category can still be reserved for
+orders, but they cannot be moved unless the destination location
+allows locked lots</li>
 </ul>
+<p>This is useful when you want to:</p>
+<ul class="simple">
+<li>Reserve specific inventory for future use but prevent actual movement</li>
+<li>Hold stock for quality inspection while still planning orders</li>
+</ul>
+<p>To override this behavior in custom operations, use the
+‘force_allow_locked_lots’ context.</p>
 <p><strong>Example Scenarios:</strong></p>
 <ul class="simple">
 <li><strong>Quality Hold</strong>: Lock a lot for quality inspection - it won’t be
-reserved for customer orders until unlocked</li>
+reserved for customer orders unless the category allows reservation</li>
 <li><strong>Expired Stock</strong>: Lock expired lots to prevent them from being
 shipped</li>
-<li><strong>Reserved Stock</strong>: Lock lots for specific customers or projects</li>
 </ul>
 </div>
 <div class="section" id="bug-tracker">

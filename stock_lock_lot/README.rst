@@ -54,8 +54,18 @@ To allow a user to block or unblock a Lot:
    Serial Numbers/Lots"
 
 To allow move locked lots to a location: #. Open the locations (menu
-"Inventory > Configuration > Warehouse Management > Locations") #. check
+"Inventory > Configuration > Warehouse Management > Locations") #. Check
 the box "Allow Locked"
+
+To configure lot behavior at product category level: #. Open the product
+categories (menu "Sales > Configuration > Product Categories") #. In the
+"Warehouse" section, you can configure:
+
+-  "Block new Serial Numbers/lots": New lots will be created as blocked
+   by default
+-  "Allow reservation of locked lots": If checked, locked lots can still
+   be reserved for orders, but cannot be moved unless the destination
+   location allows locked lots
 
 Usage
 =====
@@ -69,20 +79,33 @@ To use this module, you need to:
 
 **Reservation Behavior:**
 
--  Locked lots are automatically excluded from stock reservations
--  When creating outgoing orders (sales orders, transfers, etc.), the
-   system will only reserve from unlocked lots
--  This prevents blocked inventory from being allocated to orders
--  To override this behavior, use the 'force_allow_locked_lots' context
-   in custom operations when explicitly needed
+By default, locked lots are automatically excluded from stock
+reservations. When creating outgoing orders (sales orders, transfers,
+etc.), the system will only reserve from unlocked lots. This prevents
+blocked inventory from being allocated to orders.
+
+However, you can configure this behavior at the product category level:
+
+-  Go to *Sales > Configuration > Product Categories*
+-  In the Warehouse section, check "Allow reservation of locked lots"
+-  When enabled, locked lots in this category can still be reserved for
+   orders, but they cannot be moved unless the destination location
+   allows locked lots
+
+This is useful when you want to:
+
+-  Reserve specific inventory for future use but prevent actual movement
+-  Hold stock for quality inspection while still planning orders
+
+To override this behavior in custom operations, use the
+'force_allow_locked_lots' context.
 
 **Example Scenarios:**
 
 -  **Quality Hold**: Lock a lot for quality inspection - it won't be
-   reserved for customer orders until unlocked
+   reserved for customer orders unless the category allows reservation
 -  **Expired Stock**: Lock expired lots to prevent them from being
    shipped
--  **Reserved Stock**: Lock lots for specific customers or projects
 
 Bug Tracker
 ===========
