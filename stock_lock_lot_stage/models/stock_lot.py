@@ -123,7 +123,8 @@ class StockLot(models.Model):
 
     @api.constrains("partial_approved_qty")
     def _check_partial_approved_qty(self):
-        if not self.user_has_groups("stock_lock_lot.group_lock_lot"):
+        is_partial = any(self.mapped("partial_approved_qty"))
+        if is_partial and not self.user_has_groups("stock_lock_lot.group_lock_lot"):
             raise exceptions.AccessError(
                 _("You are not allowed to change the partial approved quantity.")
             )
