@@ -18,7 +18,6 @@ class StockScrap(models.Model):
         comodel_name="scrap.reason.code",
         compute="_compute_allowed_reason_code_ids",
     )
-    scrap_location_id = fields.Many2one(readonly=True)
 
     @api.depends("product_id", "product_id.categ_id")
     def _compute_allowed_reason_code_ids(self):
