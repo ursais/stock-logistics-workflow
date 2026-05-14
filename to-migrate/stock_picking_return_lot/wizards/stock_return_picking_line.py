@@ -7,15 +7,10 @@ from odoo import api, fields, models
 class StockReturnPickingLine(models.TransientModel):
     _inherit = "stock.return.picking.line"
 
-    _sql_constraints = [
-        # Prevent multiple lines for the same move and lot, otherwise it would
-        # become very difficult to restrict the quantities per lot per move.
-        (
-            "lot_id_move_id_uniq",
-            "UNIQUE(wizard_id, lot_id, move_id)",
-            "The same lot cannot be used on multiple lines for the same move",
-        )
-    ]
+    _lot_id_move_id_uniq = models.Constraint(
+        "UNIQUE(wizard_id, lot_id, move_id)",
+        "The same lot cannot be used on multiple lines for the same move",
+    )
 
     lot_id = fields.Many2one(
         "stock.lot",

@@ -45,13 +45,10 @@ class StockRouting(models.Model):
     )
     routing_message = fields.Html(compute="_compute_routing_message")
 
-    _sql_constraints = [
-        (
-            "location_picking_type_uniq",
-            "unique(location_id, picking_type_id)",
-            "A routing configuration already exists for this location and picking type",
-        )
-    ]
+    _location_picking_type_uniq = models.Constraint(
+        "unique(location_id, picking_type_id)",
+        "A routing configuration already exists for this location and picking type",
+    )
 
     def _routing_message_template(self):
         pull_rules = self.rule_ids.filtered(lambda r: r.method == "pull")
