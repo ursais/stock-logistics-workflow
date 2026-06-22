@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_fix_reservation_discrepancy" model="ir.actions.server">
+            <field name="name">Fix Reservation Discrepancy</field>
+            <field name="model_id" ref="stock.model_stock_picking"/>
+            <field name="binding_model_id" ref="stock.model_stock_picking"/>
+            <field name="binding_view_types">form</field>
+            <field name="state">code</field>
+            <field name="code">
+action = records.action_fix_reservation_discrepancy()
+            </field>
+        </record>
+    </data>
+</odoo>
