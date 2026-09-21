@@ -1,0 +1,2 @@
+id,name,model_id,group_id/id,operation,domain
+access_wizard_stock_picking_merge_user,access_wizard_stock_picking_merge user,model_stock_picking_merge,stock.group_stock_user,crud,

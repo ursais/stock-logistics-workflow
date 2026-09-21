@@ -3,7 +3,7 @@
 {
     "name": "Stock Move Source Relocation",
     "summary": "Change source location of unavailable moves",
-    "version": "18.0.1.2.0",
+    "version": "20.0.1.2.0",
     "development_status": "Beta",
     "category": "Warehouse Management",
     "website": "https://github.com/OCA/stock-logistics-workflow",
@@ -15,7 +15,6 @@
     "depends": [
         "stock",
         "stock_location_is_sublocation",
-        "stock_route_location_source",
-    ],
-    "data": ["views/stock_source_relocate_views.xml", "security/ir.model.access.csv"],
+        "stock_route_location_source"],
+    "data": ["views/stock_source_relocate_views.xml", "security/ir.access.csv"],
 }

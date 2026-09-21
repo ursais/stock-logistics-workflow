@@ -4,7 +4,7 @@
 {
     "name": "Stock Picking Batch Validate Confirm",
     "summary": "Request confirmation when validating batch if any pending origin moves",
-    "version": "18.0.1.0.1",
+    "version": "20.0.1.0.1",
     "development_status": "Alpha",
     "category": "Uncategorized",
     "website": "https://github.com/OCA/stock-logistics-workflow",
@@ -14,11 +14,9 @@
     "application": False,
     "installable": True,
     "depends": [
-        "stock_picking_batch",
-    ],
+        "stock_picking_batch"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "security/stock_picking_batch_validate_confirm_groups.xml",
-        "wizards/stock_picking_batch_confirm.xml",
-    ],
+        "wizards/stock_picking_batch_confirm.xml"],
 }

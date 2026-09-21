@@ -3,7 +3,7 @@
 
 {
     "name": "Picking backordering strategies",
-    "version": "18.0.1.0.0",
+    "version": "20.0.1.0.0",
     "development_status": "Production/Stable",
     "author": """ACSONE SA/NV,
                  Odoo Community Association (OCA)""",

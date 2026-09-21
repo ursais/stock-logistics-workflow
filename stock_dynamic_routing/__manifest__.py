@@ -6,18 +6,16 @@
     "maintainers": ["jbaudoux"],
     "website": "https://github.com/OCA/stock-logistics-workflow",
     "category": "Warehouse Management",
-    "version": "18.0.1.3.0",
+    "version": "20.0.1.3.0",
     "license": "AGPL-3",
     "depends": [
         # core
-        "stock",
-    ],
+        "stock"],
     "demo": [
         "demo/stock_location_demo.xml",
         "demo/stock_picking_type_demo.xml",
-        "demo/stock_routing_demo.xml",
-    ],
-    "data": ["views/stock_routing_views.xml", "security/ir.model.access.csv"],
+        "demo/stock_routing_demo.xml"],
+    "data": ["views/stock_routing_views.xml", "security/ir.access.csv"],
     "installable": True,
     "development_status": "Beta",
 }

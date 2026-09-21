@@ -78,7 +78,7 @@ class StockPickingBatch(models.Model):
             "res_model": "stock.picking.batch",
             "type": "ir.actions.act_window",
             "domain": [("id", "in", batches.ids)],
-            "context": self._context,
+            "context": self.env.context,
             "views": [[False, "list"], [False, "kanban"], [False, "form"]],
             "view_mode": "list,kanban,form",
         }

@@ -38,7 +38,7 @@ class StockValuationLayerUsage(models.Model):
 
     def init(self):
         tools.create_index(
-            self._cr,
+            self.env.cr,
             "stock_valuation_layer_usage_index",
             self._table,
             ["stock_valuation_layer_id", "stock_move_id", "stock_move_id"],

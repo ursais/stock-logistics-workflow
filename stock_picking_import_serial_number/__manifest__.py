@@ -4,7 +4,7 @@
 {
     "name": "Stock Picking Import Serial Numbers",
     "summary": "Import S/N from excel file for incoming pickings",
-    "version": "18.0.1.0.0",
+    "version": "20.0.1.0.0",
     "development_status": "Production/Stable",
     "category": "stock",
     "website": "https://github.com/OCA/stock-logistics-workflow",
@@ -16,8 +16,7 @@
         "wizard/import_serial_number_view.xml",
         "views/res_config_settings_views.xml",
         "views/stock_picking.xml",
-        "security/ir.model.access.csv",
-    ],
+        "security/ir.access.csv"],
     "external_dependencies": {"python": ["xlrd"]},
     "maintainers": ["sergio-teruel"],
 }

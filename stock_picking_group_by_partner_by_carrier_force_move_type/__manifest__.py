@@ -4,7 +4,7 @@
     "name": "Stock Picking Type Force Shipping Policy - Group By Partner and Carrier",
     "summary": "Glue module for Picking Type Force Shipping Policy"
     " and Group Transfers by Partner and Carrier",
-    "version": "18.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Hidden",
     "website": "https://github.com/OCA/stock-logistics-workflow",
     "author": "Camptocamp, Odoo Community Association (OCA)",

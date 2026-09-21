@@ -19,7 +19,7 @@
                 <field
                     name="move_ids"
                     readonly="1"
-                    context="{'tree_view_ref': 'stock_picking_batch.view_picking_move_tree_inherited'}"
+                    context="{'list_view_ref': 'stock_picking_batch.view_picking_move_tree_inherited'}"
                 />
                 <footer>
                     <button

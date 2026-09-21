@@ -3,7 +3,7 @@
 {
     "name": "Sale Stock Picking Reservation Policy",
     "summary": "Carry the reservation policy from the sale order to its deliveries.",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Inventory/Configuration",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-workflow",

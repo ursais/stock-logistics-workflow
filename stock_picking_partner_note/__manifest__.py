@@ -3,7 +3,7 @@
 
 {
     "name": "Stock Picking Partner Note",
-    "version": "18.0.1.0.0",
+    "version": "20.0.1.0.0",
     "development_status": "Beta",
     "category": "Product",
     "summary": "Add partner notes on picking",
@@ -12,14 +12,13 @@
     "license": "AGPL-3",
     "depends": ["sale_stock"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/res_partner.xml",
         "views/stock_picking_note_type.xml",
         "views/stock_picking_type.xml",
         "views/stock_picking_note.xml",
         "views/stock_picking_partner_note_menus.xml",
-        "views/res_config_settings.xml",
-    ],
+        "views/res_config_settings.xml"],
     "installable": True,
     "auto_install": False,
 }

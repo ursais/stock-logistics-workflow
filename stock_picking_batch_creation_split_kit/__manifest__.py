@@ -4,7 +4,7 @@
 {
     "name": "Stock Picking Batch Creation - Split Kit",
     "summary": "Split picking by kit quantity when exceeding limits",
-    "version": "18.0.1.0.0",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "author": "Camptocamp, BCIM, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-workflow",

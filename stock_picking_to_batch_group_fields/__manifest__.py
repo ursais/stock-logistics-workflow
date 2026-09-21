@@ -4,7 +4,7 @@
 {
     "name": "Stock Picking To Batch Group Field",
     "summary": "Allows to create batches grouped by picking fields.",
-    "version": "18.0.1.0.2",
+    "version": "20.0.1.0.2",
     "development_status": "Beta",
     "category": "Inventory/Delivery",
     "website": "https://github.com/OCA/stock-logistics-workflow",
@@ -14,13 +14,10 @@
     "application": False,
     "installable": True,
     "depends": [
-        "stock_picking_batch",
-    ],
+        "stock_picking_batch"],
     "excludes": [
-        "stock_picking_batch_extended",
-    ],
+        "stock_picking_batch_extended"],
     "data": [
-        "security/ir.model.access.csv",
-        "wizard/stock_picking_to_batch_views.xml",
-    ],
+        "security/ir.access.csv",
+        "wizard/stock_picking_to_batch_views.xml"],
 }

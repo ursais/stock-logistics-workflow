@@ -4,7 +4,7 @@
 {
     "name": "Stock Picking Operation Quick Change",
     "summary": "Change location of all picking operations",
-    "version": "18.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Warehouse",
     "website": "https://github.com/OCA/stock-logistics-workflow",
     "author": "Tecnativa, " "Odoo Community Association (OCA)",
@@ -12,8 +12,7 @@
     "installable": True,
     "depends": ["stock"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "wizards/stock_picking_wizard_view.xml",
-        "views/stock_picking_view.xml",
-    ],
+        "views/stock_picking_view.xml"],
 }

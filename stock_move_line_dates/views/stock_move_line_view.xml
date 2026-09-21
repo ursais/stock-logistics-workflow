@@ -53,12 +53,12 @@
                 <filter
                     string="Today"
                     name="today"
-                    domain="[('scheduled_date', '&gt;=', datetime.datetime.combine(context_today(), datetime.time(0, 0, 0)).to_utc()), ('scheduled_date', '&lt;', datetime.datetime.combine(context_today() + relativedelta(days=1), datetime.time(0, 0, 0)).to_utc())]"
+                    domain="[('scheduled_date', '&gt;=', 'today'), ('scheduled_date', '&lt;', 'today +1d')]"
                 />
                 <filter
                     string="Tomorrow"
                     name="tomorrow"
-                    domain="[('scheduled_date', '&gt;=', datetime.datetime.combine(context_today() + relativedelta(days=1), datetime.time(0, 0, 0)).to_utc()), ('scheduled_date', '&lt;', datetime.datetime.combine(context_today() + relativedelta(days=2), datetime.time(0, 0, 0)).to_utc())]"
+                    domain="[('scheduled_date', '&gt;=', 'today +1d'), ('scheduled_date', '&lt;', 'today +2d')]"
                 />
                 <separator />
             </xpath>
