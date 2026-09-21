@@ -1,2 +1,2 @@
 id,name,model_id,group_id/id,operation,domain
-stock_product_set.access_stock_product_set_wizard,access_stock_product_set_wizard,stock_product_set.model_stock_product_set_wizard,stock.group_stock_user,crud,
+stock_product_set.access_stock_product_set_wizard,access_stock_product_set_wizard,stock.product.set.wizard,stock.group_stock_user,crud,

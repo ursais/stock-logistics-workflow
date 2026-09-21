@@ -1,2 +1,2 @@
 id,name,model_id,group_id/id,operation,domain
-access_stock_picking_batch_operation_wizard_user,access_stock_picking_batch_operation_wizard_user,model_stock_picking_batch_operation_wizard,base.group_user,crud,
+access_stock_picking_batch_operation_wizard_user,access_stock_picking_batch_operation_wizard_user,stock.picking.batch.operation.wizard,base.group_user,crud,

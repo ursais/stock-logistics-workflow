@@ -1,3 +1,3 @@
 id,name,model_id,group_id/id,operation,domain
-access_stock_valuation_layer_usage,access_stock_valuation_layer_usage,model_stock_valuation_layer_usage,account.group_account_user,cru,
-stock_valuation_layer_usage_company_rule,Company Layer Usages,model_stock_valuation_layer_usage,,crud,"[('company_id','in', company_ids)]"
+access_stock_valuation_layer_usage,access_stock_valuation_layer_usage,stock.valuation.layer.usage,account.group_account_user,cru,
+stock_valuation_layer_usage_company_rule,Company Layer Usages,stock.valuation.layer.usage,,crud,"[('company_id','in', company_ids)]"

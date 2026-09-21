@@ -1,2 +1,2 @@
 id,name,model_id,group_id/id,operation,domain
-access_stock_picking_import_serial_number_wiz,access_stock_picking_import_serial_number_wiz,model_stock_picking_import_serial_number_wiz,base.group_user,crud,
+access_stock_picking_import_serial_number_wiz,access_stock_picking_import_serial_number_wiz,stock.picking.import.serial.number.wiz,base.group_user,crud,
